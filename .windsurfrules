@@ -1,0 +1,3 @@
+这个项目主要是用来实践前端的项目管理模式：多仓库管理（git submodule+Nx）和monorepo的区别
+
+本项目使用git submodule + Nx管理项目

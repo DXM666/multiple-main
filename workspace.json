@@ -1,0 +1,7 @@
+{
+  "version": 2,
+  "projects": {
+    // 子模块项目将在这里自动添加
+    // 当使用 nx g @nrwl/workspace:library 命令时
+  }
+}

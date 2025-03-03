@@ -1,0 +1,23 @@
+{
+  "name": "multiple-main",
+  "version": "0.1.0",
+  "private": true,
+  "description": "多仓库管理（git submodule+Nx）前端项目",
+  "scripts": {
+    "start": "nx run-many --target=serve --all",
+    "build": "nx run-many --target=build --all",
+    "test": "nx run-many --target=test --all",
+    "lint": "nx run-many --target=lint --all",
+    "prepare": "husky install"
+  },
+  "devDependencies": {
+    "@nrwl/cli": "^15.0.0",
+    "@nrwl/nx-cloud": "latest",
+    "@nrwl/workspace": "^15.0.0",
+    "husky": "^8.0.0",
+    "nx": "15.0.0"
+  },
+  "workspaces": [
+    "packages/*"
+  ]
+}
