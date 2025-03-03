@@ -6,10 +6,14 @@
 
 ```
 multiple-main/              # 主项目仓库
-├── packages/               # 子模块目录
-│   ├── app-one/            # 子模块项目1 (git submodule)
-│   └── app-two/            # 子模块项目2 (git submodule)
+├── packages/               # 子模块目录（存放可复用的库）
+│   └── multiple-packages/  # 子模块项目 (git submodule)
+│       ├── utils/          # 工具函数库
+│       └── common/         # 通用组件库
+├── apps/                   # 应用程序目录
+│   └── demo-app/           # 示例应用（使用子模块中的组件和工具）
 ├── nx.json                 # Nx配置文件
+├── workspace.json          # 工作空间配置
 ├── package.json            # 主项目依赖
 └── README.md               # 项目说明
 ```
@@ -20,6 +24,7 @@ multiple-main/              # 主项目仓库
 - **统一构建**: 使用Nx提供统一的构建、测试和部署流程
 - **依赖共享**: 可以在子项目间共享和复用代码
 - **增量构建**: Nx支持智能缓存和增量构建，提高开发效率
+- **清晰职责**: packages目录专门存放子模块（库），apps目录存放应用
 
 ## 使用方法
 
@@ -35,46 +40,54 @@ git submodule init
 git submodule update
 ```
 
-### 添加新的子模块
+### 安装依赖
 
 ```bash
-# 添加子模块
-git submodule add <子模块Git地址> packages/new-app
-
-# 更新Nx配置
-nx g @nrwl/workspace:library new-app
+# 安装所有依赖
+pnpm install
 ```
 
 ### 开发命令
 
 ```bash
-# 安装依赖
-npm install
-
-# 启动所有项目
-npm start
+# 启动开发服务器
+pnpm start
 
 # 构建所有项目
-npm run build
+pnpm build
 
-# 测试所有项目
-npm run test
+# 运行测试
+pnpm test
 
-# 只构建特定项目
-nx build app-one
+# 代码检查
+pnpm lint
 ```
 
-## 与Monorepo的区别
+## 添加新的子模块
 
-相比于Monorepo方案，Git Submodule + Nx的多仓库管理方式有以下特点：
+```bash
+# 添加新的子模块
+git submodule add <子模块仓库地址> packages/<子模块名称>
 
-1. **仓库独立性**: 每个子项目都是独立的Git仓库，可以有自己的版本控制和发布周期
-2. **权限管理**: 可以对不同子模块设置不同的访问权限
-3. **按需克隆**: 可以只克隆需要的子模块，而不必克隆整个代码库
-4. **历史记录**: 每个子模块保留自己的完整Git历史
+# 更新配置
+# 1. 在tsconfig.base.json中添加路径映射
+# 2. 在workspace.json中添加项目配置（如果需要）
+```
 
-## 注意事项
+## 项目管理模式说明
 
-- 子模块的更新需要额外的Git命令
-- 需要正确管理子模块的分支
-- 主项目需要记录子模块的具体提交点
+本项目采用的是多仓库管理模式（git submodule + Nx），而非monorepo模式。主要区别：
+
+1. **多仓库模式**：
+   - 每个子项目都有独立的Git仓库
+   - 通过Git Submodule引用
+   - 适合多团队独立开发的场景
+   - 可以精确控制每个子项目的访问权限
+
+2. **Monorepo模式**：
+   - 所有代码在同一个Git仓库中
+   - 适合紧密协作的团队
+   - 更容易共享代码和配置
+   - 原子提交和变更
+
+本项目结合了两种模式的优点：使用多仓库保持独立性，同时使用Nx提供统一的工具链和构建流程。

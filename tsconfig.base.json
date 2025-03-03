@@ -15,8 +15,13 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      // 子模块路径别名将在这里添加
-    }
+      "@multiple-packages/utils": ["packages/multiple-packages/utils/src/index.ts"],
+      "@multiple-packages/common": ["packages/multiple-packages/common/src/index.ts"],
+      "@multiple-main/demo-app": ["apps/demo-app/src/index.ts"]
+    },
+    "jsx": "react-jsx",
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true
   },
   "exclude": ["node_modules", "tmp"]
 }
