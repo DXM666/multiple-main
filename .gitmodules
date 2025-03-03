@@ -1,0 +1,14 @@
+# 这个文件会在执行 git submodule add 命令时自动更新
+# 以下是示例配置，实际使用时请替换为真实的Git仓库地址
+
+# [submodule "packages/app-one"]
+#   path = packages/app-one
+#   url = https://github.com/your-org/app-one.git
+
+# [submodule "packages/app-two"]
+#   path = packages/app-two
+#   url = https://github.com/your-org/app-two.git
+
+[submodule "packages/multiple-packages"]
+	path = packages/multiple-packages
+	url = https://github.com/DXM666/multiple-packages.git
