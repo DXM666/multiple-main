@@ -7,70 +7,24 @@
       "projectType": "application",
       "targets": {
         "build": {
-          "executor": "@nrwl/web:webpack",
+          "executor": "@nrwl/webpack:webpack",
           "outputs": ["{options.outputPath}"],
           "options": {
             "outputPath": "dist/apps/demo-app",
             "index": "apps/demo-app/src/index.html",
             "main": "apps/demo-app/src/main.tsx",
-            "polyfills": "apps/demo-app/src/polyfills.ts",
             "tsConfig": "apps/demo-app/tsconfig.app.json",
             "assets": [
               "apps/demo-app/src/favicon.ico",
               "apps/demo-app/src/assets"
             ],
-            "styles": ["apps/demo-app/src/styles.css"],
-            "scripts": [],
-            "webpackConfig": "@nrwl/react/plugins/webpack"
-          },
-          "configurations": {
-            "production": {
-              "fileReplacements": [
-                {
-                  "replace": "apps/demo-app/src/environments/environment.ts",
-                  "with": "apps/demo-app/src/environments/environment.prod.ts"
-                }
-              ],
-              "optimization": true,
-              "outputHashing": "all",
-              "sourceMap": false,
-              "extractCss": true,
-              "namedChunks": false,
-              "extractLicenses": true,
-              "vendorChunk": false,
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "500kb",
-                  "maximumError": "1mb"
-                }
-              ]
-            }
+            "styles": ["apps/demo-app/src/styles.css"]
           }
         },
         "serve": {
-          "executor": "@nrwl/web:dev-server",
+          "executor": "@nrwl/webpack:dev-server",
           "options": {
             "buildTarget": "demo-app:build"
-          },
-          "configurations": {
-            "production": {
-              "buildTarget": "demo-app:build:production"
-            }
-          }
-        },
-        "lint": {
-          "executor": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": ["apps/demo-app/**/*.{ts,tsx,js,jsx}"]
-          }
-        },
-        "test": {
-          "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/apps/demo-app"],
-          "options": {
-            "jestConfig": "apps/demo-app/jest.config.js",
-            "passWithNoTests": true
           }
         }
       }
